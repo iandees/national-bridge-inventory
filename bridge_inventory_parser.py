@@ -32,16 +32,26 @@ if __name__ == '__main__':
     for input_line in reader:
         output_line = input_line
 
-        lon = input_line['LONG_017']
-        (degrees, minutes, seconds) = map(int, (lon[0:3], lon[3:5], lon[5:9]))
-        seconds = seconds / 100.0
-        lon = dms2dd(degrees, minutes, seconds, 'W')
-        output_line['lon'] = round(lon, 7)
+        try:
+            lat = input_line['LAT_016']
+            if lat and len(lat) == 8:
+                (degrees, minutes, seconds) = map(float, (lat[0:2], lat[2:4], lat[4:8]))
+                seconds = seconds / 100.0
+                lat = dms2dd(degrees, minutes, seconds, 'N')
+                output_line['lat'] = round(lat, 7)
+        except:
+            print "Couldn't parse lat: {}".format(input_line['LAT_016'])
+            raise
 
-        lat = input_line['LAT_016']
-        (degrees, minutes, seconds) = map(int, (lat[0:2], lat[2:4], lat[4:8]))
-        seconds = seconds / 100.0
-        lat = dms2dd(degrees, minutes, seconds, 'N')
-        output_line['lat'] = round(lat, 7)
+        try:
+            lon = input_line['LONG_017']
+            if lon and len(lon) == 9:
+                (degrees, minutes, seconds) = map(float, (lon[0:3], lon[3:5], lon[5:9]))
+                seconds = seconds / 100.0
+                lon = dms2dd(degrees, minutes, seconds, 'W')
+                output_line['lon'] = round(lon, 7)
+        except:
+            print "Couldn't parse lon: {}".format(input_line['LONG_017'])
+            raise
 
         writer.writerow(output_line)
