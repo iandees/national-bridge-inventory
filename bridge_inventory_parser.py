@@ -39,6 +39,8 @@ if __name__ == '__main__':
                 seconds = seconds / 100.0
                 lat = dms2dd(degrees, minutes, seconds, 'N')
                 output_line['lat'] = round(lat, 7)
+            else:
+                print "Skipping because lat: {}".format(input_line['LAT_016'])
         except:
             print "Couldn't parse lat: {}".format(input_line['LAT_016'])
             raise
@@ -50,6 +52,8 @@ if __name__ == '__main__':
                 seconds = seconds / 100.0
                 lon = dms2dd(degrees, minutes, seconds, 'W')
                 output_line['lon'] = round(lon, 7)
+            else:
+                print "Skipping because lon: {}".format(input_line['LONG_017'])
         except:
             print "Couldn't parse lon: {}".format(input_line['LONG_017'])
             raise
