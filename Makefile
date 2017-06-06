@@ -1,10 +1,10 @@
-data/2016del.zip:
-	curl -o data/2016del.zip https://www.fhwa.dot.gov/bridge/nbi/2016del.zip
-	unzip data/2016del.zip -d data
-
-data/2016/%.csv: data/2016del.zip
+data/2016/2016del.zip:
 	mkdir -p data/2016
-	python bridge_inventory_parser.py $(subst 2016/,,$(subst .csv,16.TXT,$@)) $@
+	curl -o data/2016/2016del.zip https://www.fhwa.dot.gov/bridge/nbi/2016del.zip
+	unzip data/2016/2016del.zip -d data/2016
+
+data/2016/%.csv: data/2016/2016del.zip
+	python bridge_inventory_parser.py $(subst .csv,16.TXT,$@) $@
 
 clean:
 	rm -f data/2016/AL.csv \
