@@ -7,7 +7,9 @@ data/2016/%.csv: data/2016/2016del.zip
 	python bridge_inventory_parser.py $(subst .csv,16.TXT,$@) $@
 
 clean:
-	rm -f data/2016/AL.csv \
+	rm -f \
+	data/2016/AL.csv \
+	data/2016/AK.csv \
 	data/2016/AR.csv \
 	data/2016/AZ.csv \
 	data/2016/CA.csv \
@@ -59,7 +61,9 @@ clean:
 	data/2016/WV.csv \
 	data/2016/WY.csv
 
-all: data/2016/AL.csv \
+all: \
+	data/2016/AL.csv \
+	data/2016/AK.csv \
 	data/2016/AR.csv \
 	data/2016/AZ.csv \
 	data/2016/CA.csv \
