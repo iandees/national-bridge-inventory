@@ -61,7 +61,7 @@ clean:
 	data/2016/WV.csv \
 	data/2016/WY.csv
 
-all: \
+states: \
 	data/2016/AL.csv \
 	data/2016/AK.csv \
 	data/2016/AR.csv \
@@ -114,3 +114,7 @@ all: \
 	data/2016/WI.csv \
 	data/2016/WV.csv \
 	data/2016/WY.csv
+
+nation: states
+	head -n 1 data/2016/AK.csv >> data/2016/nationwide.csv
+	tail -q -n +2 data/2016/[A-Z][A-Z].csv >> data/2016/nationwide.csv
